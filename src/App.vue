@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="{'hide-menu': !isMenuVisible}">
-    <Header title="Rocket Bit" :hideToggle="false"/>
+    <Header title="Rocket Bit" :hideToggle="false" :hideUserDropdown="false"/>
     <Menu />
     <Content />
     <Footer />

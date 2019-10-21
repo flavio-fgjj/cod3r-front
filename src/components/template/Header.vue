@@ -3,15 +3,17 @@
     <a class="toggle" @click="toggleMenu" v-if="!hideToggle">
       <i class="fa fa-lg" :class="icon"></i>
     </a>
-    <h1 class="title">
-      {{ title }}
-    </h1>
+    <span class="title">
+      <b-img class="image" src="static/img/logo.png" alt="Logo"></b-img>
+      <router-link to="/">{{ title }}</router-link>
+    </span>
     <user-dropdown v-if="!hideUserDropdown" />
   </header>
 </template>
 
 <script>
 import UserDropdown from './UserDropdown'
+
 export default {
   name: 'Header',
   components: { UserDropdown },
@@ -51,7 +53,18 @@ export default {
     text-align: center;
   }
 
+  .image {
+    height: 40px;
+    width: 50px;
+    padding-right: 10px;
+  }
+
   .title a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .title a:hover {
     color: #fff;
     text-decoration: none;
   }
@@ -69,6 +82,7 @@ export default {
   }
 
   header.header > a.toggle:hover {
+    color: #fff;
     background-color: rgba(0, 0, 0, 0.2);
   }
 </style>
