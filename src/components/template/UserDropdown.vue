@@ -3,7 +3,12 @@
     <div class="user-button">
       <span class="d-none d-sm-block">{{ user.name }}</span>
       <div class="user-dropdown-img">
-          <Gravatar :email="user.email" alt="User" />
+        <v-avatar>
+          <img
+            src="https://cdn.vuetifyjs.com/images/john.jpg"
+            alt="User"
+          >
+        </v-avatar>
       </div>
       <i class="fa fa-angle-down"></i>
     </div>
@@ -19,11 +24,11 @@
 
 <script>
 import { mapState } from 'vuex'
-import Gravatar from 'vue-gravatar'
+// import Gravatar from 'vue-gravatar'
 
 export default {
   name: 'UserDropdown',
-  components: { Gravatar },
+  // components: { Gravatar },
   computed: mapState(['user'])
 }
 </script>

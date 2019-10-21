@@ -4,7 +4,7 @@
       <i class="fa fa-lg" :class="icon"></i>
     </a>
     <span class="title">
-      <b-img class="image" src="static/img/logo.png" alt="Logo"></b-img>
+      <b-img class="image" src="./static/img/logo.png" alt="Logo"></b-img>
       <router-link to="/">{{ title }}</router-link>
     </span>
     <user-dropdown v-if="!hideUserDropdown" />
