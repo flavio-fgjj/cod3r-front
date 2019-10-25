@@ -3,10 +3,14 @@
     <a class="toggle" @click="toggleMenu" v-if="!hideToggle">
       <i class="fa fa-lg" :class="icon"></i>
     </a>
-    <span class="title">
+
       <b-img class="image" src="./static/img/logo.png" alt="Logo"></b-img>
-      <router-link to="/">{{ title }}</router-link>
-    </span>
+      <!-- <router-link to="/">{{ title }}</router-link> -->
+      <h1 class="font-weight-bold">
+        <router-link to="/"><label class="rocket-2">ROCKET</label></router-link>
+        <router-link to="/"><label class="rocket-3">BIT</label></router-link>
+      </h1>
+
     <user-dropdown v-if="!hideUserDropdown" />
   </header>
 </template>
@@ -84,5 +88,15 @@ export default {
   header.header > a.toggle:hover {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .rocket-2 {
+    color: #add136;
+    margin-top: 15px;
+  }
+
+  .rocket-3 {
+    color: #f7941d;
+    margin-top: 15px;
   }
 </style>
