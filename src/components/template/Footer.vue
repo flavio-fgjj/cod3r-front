@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <span>Copyright <strong>Rocket Bit</strong> © 2017-{{ new Date().getFullYear() }}</span>
+    <span><strong>Rocket Bit</strong> © 2017-{{ new Date().getFullYear() }}</span>
   </footer>
 </template>
 

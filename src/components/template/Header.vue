@@ -3,14 +3,15 @@
     <a class="toggle" @click="toggleMenu" v-if="!hideToggle">
       <i class="fa fa-lg" :class="icon"></i>
     </a>
-
-      <b-img class="image" src="./static/img/logo.png" alt="Logo"></b-img>
-      <!-- <router-link to="/">{{ title }}</router-link> -->
-      <h1 class="font-weight-bold">
-        <router-link to="/"><label class="rocket-2">ROCKET</label></router-link>
-        <router-link to="/"><label class="rocket-3">BIT</label></router-link>
-      </h1>
-
+    <div class="logo-header">
+      <svg>
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="static/img/icones-rckt.svg#rocket"></use>
+      </svg>
+      <router-link to="/">
+        <span class="font-weight-bold rocket-2">ROCKET</span>
+        <span class="font-weight-bold rocket-3">BIT</span>
+      </router-link>
+    </div>
     <user-dropdown v-if="!hideUserDropdown" />
   </header>
 </template>
@@ -49,26 +50,23 @@ export default {
     align-items: center;
   }
 
-  .title {
-    font-size: 1.2rem;
-    color: #fff;
-    font-weight: 100;
+  .logo-header {
     flex-grow: 1;
     text-align: center;
   }
 
-  .image {
+  .logo-header > svg {
+    fill: #262261 !important;
     height: 40px;
-    width: 50px;
-    padding-right: 10px;
+    width: 45px;
   }
 
-  .title a {
+  .logo-header a {
     color: #fff;
     text-decoration: none;
   }
 
-  .title a:hover {
+  .logo-header a:hover {
     color: #fff;
     text-decoration: none;
   }
@@ -92,11 +90,10 @@ export default {
 
   .rocket-2 {
     color: #add136;
-    margin-top: 15px;
+    padding-left: 10px;
   }
 
   .rocket-3 {
     color: #f7941d;
-    margin-top: 15px;
   }
 </style>

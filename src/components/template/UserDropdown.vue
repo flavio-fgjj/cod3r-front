@@ -5,7 +5,7 @@
       <div class="user-dropdown-img">
         <v-avatar>
           <img
-            src="https://cdn.vuetifyjs.com/images/john.jpg"
+            src="static/img/face-2.png"
             alt="User"
           >
         </v-avatar>

@@ -5,8 +5,7 @@
     </div>
     <div class="stat-info">
       <span class="stat-title">{{ title }}</span>
-      <span class="stat-value">1</span>
-      <!-- <span class="stat-value">{{ value }}</span> -->
+      <span class="stat-value">{{ value }}</span>
     </div>
   </div>
 </template>

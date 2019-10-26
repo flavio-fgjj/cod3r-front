@@ -1,7 +1,7 @@
 <template>
   <div class="auth-content">
     <div class="auth-modal">
-      <b-img class="image" src="./static/img/logo.png" alt="Logo"></b-img>
+      <b-img src="./static/img/logo-rocket-bit.png" alt="Logo" class="image"></b-img>
       <hr>
       <div class="auth-title">Login</div>
 
@@ -31,7 +31,6 @@ export default {
       axios.post(`${baseApiUrl}/signin`, this.user)
         .then(res => {
           this.$store.commit('setUser', res.data)
-          console.log(JSON.stringify(res.data))
           localStorage.setItem(userKey, JSON.stringify(res.data))
           this.$router.push({ path: '/' })
         })
@@ -67,6 +66,11 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .image {
+    width: 110px;
+    height: 100px;
   }
 
   .auth-title {
