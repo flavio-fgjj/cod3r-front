@@ -6,7 +6,11 @@
 
 <script>
 export default {
-  name: 'Footer'
+  name: 'Footer',
+  data () {
+    return {
+    }
+  }
 }
 </script>
 
@@ -18,7 +22,8 @@ export default {
 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     padding-right: 10px;
+    justify-content: flex-end;
   }
+
 </style>

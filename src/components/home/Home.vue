@@ -18,22 +18,24 @@
 import PageTitle from '../template/PageTitle'
 import Stat from './Stat'
 import axios from 'axios'
-import { baseApiUrl } from '@/global'
+import { baseApiUrl, showError } from '@/global'
 
 export default {
   name: 'Home',
   components: { PageTitle, Stat },
   data: function () {
     return {
-      stat: {}
+      stat: {},
+      getStat: false
     }
   },
   methods: {
     getStats () {
-      axios.get(`${baseApiUrl}/stats`).then(res => {
-        console.log(res.data)
-        this.stat = res.data
-      })
+      axios.get(`${baseApiUrl}/stats`)
+        .then(res => {
+          this.stat = res.data
+        })
+        .catch(showError)
     }
   },
   mounted () {

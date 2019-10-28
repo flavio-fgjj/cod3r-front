@@ -12,12 +12,26 @@
         <span class="font-weight-bold rocket-3">BIT</span>
       </router-link>
     </div>
+    <b-dropdown v-if="!hideUserDropdown"
+      split
+      split-variant="outline-secondary"
+      variant="secondary"
+      text="Projeto"
+      class="m-2"
+      @click.prevent="changeCampaign"
+      v-model="idCampanha"
+    >
+      <b-dropdown-item href="#" v-for="item in camps" :key="item.id">{{ item.campanha }}</b-dropdown-item>
+    </b-dropdown>
     <user-dropdown v-if="!hideUserDropdown" />
   </header>
 </template>
 
 <script>
+
+import { baseApiUrl, showError } from '@/global'
 import UserDropdown from './UserDropdown'
+import axios from 'axios'
 
 export default {
   name: 'Header',
@@ -27,6 +41,12 @@ export default {
     hideToggle: Boolean,
     hideUserDropdown: Boolean
   },
+  data () {
+    return {
+      camps: [],
+      idCampanha: this.$store.user.idCampanha
+    }
+  },
   computed: {
     icon () {
       return this.$store.state.isMenuVisible ? 'fa-angle-left' : 'fa-angle-down'
@@ -35,7 +55,21 @@ export default {
   methods: {
     toggleMenu () {
       this.$store.commit('toggleMenu')
+    },
+    getCampaign () {
+      axios.get(`${baseApiUrl}/campanhas/${this.$store.state.user.id}`)
+        .then(res => {
+          this.camps = res.data
+        })
+        .catch(showError)
+    },
+    changeCampaign () {
+      this.$store.state.user.idCampanha = this.idCampanha
+      console.log(this.$store.state.user)
     }
+  },
+  mounted () {
+    this.getCampaign()
   }
 }
 </script>
@@ -52,7 +86,7 @@ export default {
 
   .logo-header {
     flex-grow: 1;
-    text-align: center;
+    text-align: left;
   }
 
   .logo-header > svg {
