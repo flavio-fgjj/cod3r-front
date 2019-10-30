@@ -12,27 +12,47 @@
         <span class="font-weight-bold rocket-3">BIT</span>
       </router-link>
     </div>
+    <b-dropdown v-if="!hideUserDropdown"
+      split
+      split-variant="outline-secondary"
+      variant="secondary"
+      :text="user.campanha ? user.campanha : 'Projetos'"
+      class="m-2"
+    >
+      <b-dropdown-item
+        v-for="(item, index) in camps"
+        :key="index"
+        v-model="idCamp"
+        @click="user.campanha = item.campanha, user.idCampanha = item.id, changeCampaign()"
+      >{{ item.campanha }}
+      </b-dropdown-item>
+    </b-dropdown>
     <user-dropdown v-if="!hideUserDropdown" />
   </header>
 </template>
 
 <script>
-
 import UserDropdown from './UserDropdown'
+import { mapState } from 'vuex'
+import axios from 'axios'
+import { baseApiUrl, showError } from '@/global'
 
 export default {
   name: 'Header',
-  data () {
-    return {
-    }
-  },
   components: { UserDropdown },
   props: {
     title: String,
     hideToggle: Boolean,
     hideUserDropdown: Boolean
   },
+  data () {
+    return {
+      camps: [],
+      idCamp: 0
+    }
+  },
   computed: {
+    ...mapState(['user']),
     icon () {
       return this.$store.state.isMenuVisible ? 'fa-angle-left' : 'fa-angle-down'
     }
@@ -40,7 +60,22 @@ export default {
   methods: {
     toggleMenu () {
       this.$store.commit('toggleMenu')
+    },
+    getCampaign () {
+      axios.get(`${baseApiUrl}/campanhas/${this.user.id}`)
+        .then(res => {
+          this.camps = res.data
+        })
+        .catch(showError)
+    },
+    changeCampaign () {
+      let userChange = this.$store.state.user
+      userChange.idCampanha = this.idCamp
+      this.$store.commit('setUser', userChange)
     }
+  },
+  mounted () {
+    this.getCampaign()
   }
 }
 </script>

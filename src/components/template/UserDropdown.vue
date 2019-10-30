@@ -12,17 +12,10 @@
       </div>
       <i class="fa fa-angle-down"></i>
     </div>
-
     <div class="user-dropdown-content">
       <router-link to="/admin" v-if="user.admin">
         <i class="fa fa-cogs"></i> Administração
       </router-link>
-      <v-select
-        sm="2"
-        :items="items"
-        label="Outlined style"
-        outlined
-      ></v-select>
       <v-divider></v-divider>
       <a href @click.prevent="logout"><i class="fa fa-sign-out"></i> Sair</a>
     </div>

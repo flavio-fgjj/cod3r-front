@@ -1,15 +1,18 @@
 <template>
   <div class="page-title">
-    <h1><i v-if="icon" :class="icon"></i> {{ main }} </h1>
+    <h1><i v-if="icon" :class="icon"></i> {{ main }} - {{ user.campanha }} </h1>
     <h2>{{ sub }}</h2>
     <hr>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'PageTitle',
-  props: ['icon', 'main', 'sub']
+  props: ['icon', 'main', 'sub'],
+  computed: mapState(['user'])
 }
 </script>
 

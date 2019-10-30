@@ -1,53 +1,28 @@
 <template>
   <div class="home">
     <PageTitle icon="fa fa-home" main="Dashboard" sub="Rocket Bit" />
-    <div class="stats">
-      <Stat title="Doações" :value="stat.totalSuccess"
-        icon="fa fa-thumbs-o-up" color="#3282cd" />
-      <Stat title="Recusas" :value="stat.totalNegatives"
-        icon="fa fa-thumbs-o-down" color="#d54d50" />
-      <Stat title="Ligações" :value="stat.totalCalls"
-        icon="fa fa-phone" color="#6b6382" />
-      <Stat title="Usuários" :value="stat.totalUsers"
-        icon="fa fa-user" color="#32cda1" />
-    </div>
+    <net v-if="user.campanha == 'NET'"/>
+    <claro v-if="user.campanha == 'CLARO'"/>
+    <unicef v-if="user.campanha == 'UNICEF'"/>
+    <brastemp v-if="user.campanha == 'BRASTEMP'"/>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import PageTitle from '../template/PageTitle'
-import Stat from './Stat'
-import axios from 'axios'
-import { baseApiUrl, showError } from '@/global'
+import Unicef from './stats/Unicef'
+import Net from './stats/Net'
+import Claro from './stats/Claro'
+import Brastemp from './stats/Brastemp'
 
 export default {
   name: 'Home',
-  components: { PageTitle, Stat },
-  data: function () {
-    return {
-      stat: {},
-      getStat: false
-    }
-  },
-  methods: {
-    getStats () {
-      axios.get(`${baseApiUrl}/stats`)
-        .then(res => {
-          this.stat = res.data
-        })
-        .catch(showError)
-    }
-  },
-  mounted () {
-    this.getStats()
-  }
+  computed: mapState(['user']),
+  components: { PageTitle, Unicef, Net, Claro, Brastemp }
 }
 </script>
 
 <style>
-  .stats {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
 </style>
