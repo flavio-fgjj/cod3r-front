@@ -12,17 +12,23 @@
         <span class="font-weight-bold rocket-3">BIT</span>
       </router-link>
     </div>
-    <b-dropdown v-if="!hideUserDropdown"
-      split
-      split-variant="outline-secondary"
-      variant="secondary"
-      text="Projeto"
-      class="m-2"
-      @click.prevent="changeCampaign"
-      v-model="idCampanha"
-    >
-      <b-dropdown-item href="#" v-for="item in camps" :key="item.id">{{ item.campanha }}</b-dropdown-item>
-    </b-dropdown>
+    <div>
+      <b-dropdown split
+        split-variant="outline-secondary"
+        variant="secondary"
+        :text="item.campanha"
+        class="m-2"
+        v-model="idCamp"
+      >
+        <b-dropdown-item
+          v-for="(item, index) in camps"
+          :key="index"
+          :value="item.id"
+          @click="changeCampaign"
+        >{{ item.campanha }}
+        </b-dropdown-item>
+      </b-dropdown>
+    </div>
     <user-dropdown v-if="!hideUserDropdown" />
   </header>
 </template>
@@ -44,7 +50,7 @@ export default {
   data () {
     return {
       camps: [],
-      idCampanha: this.$store.user.idCampanha
+      idCamp: this.$store.state.user.idCampanha
     }
   },
   computed: {
@@ -64,8 +70,12 @@ export default {
         .catch(showError)
     },
     changeCampaign () {
-      this.$store.state.user.idCampanha = this.idCampanha
-      console.log(this.$store.state.user)
+      let userChange = this.$store.state.user
+      userChange.idCamp = this.idCamp
+      this.$store.commit('setUser', userChange)
+      console.log(userChange)
+      console.log(this.idCamp)
+      this.$store.state.user.idCampanha = this.idCamp
     }
   },
   mounted () {
