@@ -22,7 +22,7 @@ export default {
   name: 'App',
   components: { Header, Menu, Content, Footer, Loading },
   computed: mapState(['isMenuVisible', 'user']),
-  data: function () {
+  data () {
     return {
       validatingToken: true
     }
@@ -37,7 +37,8 @@ export default {
 
       if (!userData) {
         this.validatingToken = false
-        return this.$router.push({ name: 'auth' })
+        this.$router.push({ name: 'auth' })
+        return
       }
 
       const res = await axios.post(`${baseApiUrl}/validateToken`, userData)
@@ -46,7 +47,6 @@ export default {
         this.$store.commit('setUser', userData)
       } else {
         localStorage.removeItem(userKey)
-        console.log('ok')
         this.$router.push({ name: 'auth' })
       }
 

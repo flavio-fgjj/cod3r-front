@@ -20,10 +20,14 @@ export default {
   name: 'Menu',
   components: { Tree },
   computed: mapState(['isMenuVisible']),
-  data: function () {
+  data () {
     return {
       treeFilter: '',
-      treeData: this.getDataTree(),
+      treeData: [
+        { name: 'Item 1' },
+        { name: 'Item 2' },
+        { name: 'Item 3', children: [{ name: 'Item 3.1' }, { name: 'Item 3.2' }] }
+      ],
       treeOptions: {
         propertyNames: { 'text': 'name' },
         filter: { emptyText: 'Pesquisa não encontrada' }
@@ -43,10 +47,16 @@ export default {
   .menu {
     grid-area: menu;
     background: linear-gradient(to right, #41484b, #809abb);
-
+    color: #fff;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+  }
+
+  .menu span,
+  .menu span:hover {
+    color: #fff;
+    text-decoration: none;
   }
 
   .menu a,
@@ -68,19 +78,18 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-
     margin: 20px;
     padding-bottom: 8px;
-    border-bottom: 1px solid #AAA;
+    border-bottom: 1px solid #fff;
   }
 
   .menu .menu-filter i {
-    color: #AAA;
+    color: rgb(231, 214, 214);
     margin-right: 10px;
   }
 
   .menu input {
-    color: #CCC;
+    color: #fff;
     font-size: 1.3rem;
     border: 0;
     outline: 0;
@@ -89,7 +98,7 @@ export default {
   }
 
   .tree-filter-empty {
-    color: #CCC;
+    color: #fff;
     font-size: 1.3rem;
     margin-left: 20px;
   }

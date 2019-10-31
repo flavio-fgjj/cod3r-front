@@ -1,16 +1,15 @@
 <template>
-  <b-dropdown split
-    split-variant="outline-secondary"
-    variant="secondary"
-    :text="item.campanha ? item.campnha : 'teste'"
+  <b-dropdown
+    split
+    variant="outline-dark"
+    :text="user.campanha ? user.campanha : 'Projetos'"
     class="m-2"
-    v-model="idCamp"
   >
     <b-dropdown-item
       v-for="(item, index) in camps"
       :key="index"
-      :value="item.id"
-      @click="changeCampaign"
+      v-model="idCamp"
+      @click="user.campanha = item.campanha, user.idCampanha = item.id, changeCampaign()"
     >{{ item.campanha }}
     </b-dropdown-item>
   </b-dropdown>
@@ -19,32 +18,32 @@
 <script>
 import axios from 'axios'
 import { baseApiUrl, showError } from '@/global'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Projects',
   data () {
     return {
       camps: [],
-      idCamp: this.$store.state.user.idCampanha
+      idCamp: 0
     }
   },
+  computed: mapState(['user']),
   methods: {
     getCampaign () {
-      axios.get(`${baseApiUrl}/campanhas/${this.$store.state.user.id}`)
+      axios.get(`${baseApiUrl}/campanhas/${this.user.id}`)
         .then(res => {
           this.camps = res.data
         })
         .catch(showError)
     },
     changeCampaign () {
-      let userChange = this.$store.state.user
+      let userChange = this.user
       userChange.idCampanha = this.idCamp
       this.$store.commit('setUser', userChange)
-      console.log(userChange)
-      console.log(this.idCamp)
     }
   },
-  mounted () {
+  beforeMount () {
     this.getCampaign()
   }
 }
