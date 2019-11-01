@@ -5,6 +5,7 @@
     <claro v-if="user.campanha == 'CLARO'"/>
     <unicef v-if="user.campanha == 'UNICEF'"/>
     <brastemp v-if="user.campanha == 'BRASTEMP'"/>
+    <run />
   </div>
 </template>
 
@@ -16,11 +17,12 @@ import Unicef from './stats/Unicef'
 import Net from './stats/Net'
 import Claro from './stats/Claro'
 import Brastemp from './stats/Brastemp'
+import Run from './runs/Run'
 
 export default {
   name: 'Home',
   computed: mapState(['user']),
-  components: { PageTitle, Unicef, Net, Claro, Brastemp }
+  components: { PageTitle, Unicef, Net, Claro, Brastemp, Run }
 }
 </script>
 
